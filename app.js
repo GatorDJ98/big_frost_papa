@@ -102,7 +102,11 @@ app.post('/deletefood/:id', async (req, res) => {
     
     client.connect; 
     const collection = client.db("chillAppz").collection("food");
-    let result = await collection.findOneAndDelete( { _id: new ObjectId( req.params.id) })
+    let result = await collection.findOneAndDelete(
+        { 
+          "_id": new ObjectId( req.params.id) 
+        }
+      )
     .then(result => {
       console.log(result); 
       res.redirect('/');
@@ -122,7 +126,9 @@ app.post('/updatefood/:id', async (req, res) => {
     
     client.connect; 
     const collection = client.db("chillAppz").collection("food");
-    let result = await collection.findOneAndUpdate( { _id: new ObjectId( req.params.id) })
+    let result = await collection.findOneAndUpdate( 
+      {"_id": new ObjectId( req.params.id)}, {$set: {"Calories": "ALOT OF CALORIES"}}
+    )
     .then(result => {
       console.log(result); 
       res.redirect('/');
